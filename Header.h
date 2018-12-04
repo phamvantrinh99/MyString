@@ -18,10 +18,22 @@ public:
 	MYSTRING& operator=(const string&str);
 	MYSTRING& operator=(const char* c);
 	char* begin();
+	char *end();
+	char* rbegin();
+	char *rend();
 	int size();
 	int length();
 	void resize(int n);
 	void resize(int n, char c);
 	int capacity();
+	void clear();
+	bool empty();
+	char& operator[](int n);
+	char at(int n);
+	char back();
+	char front();
+	MYSTRING& operator+=(const MYSTRING&s);
+	MYSTRING& operator+(const string&s);
+	MYSTRING& operator+=(const char*s);
 };
 #endif
