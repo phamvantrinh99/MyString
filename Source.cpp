@@ -47,13 +47,13 @@ MYSTRING& MYSTRING::operator=(const char*c)
 	strcpy(str, c);
 	return *this;
 }
-char* MYSTRING::begin()
+MYSTRING::iterator MYSTRING::begin()
 {
-	return &str[0];
+	return str;
 }
-char * MYSTRING::end()
+MYSTRING::iterator MYSTRING::end()
 {
-	return &str[len];
+	return str+len;
 }
 char* MYSTRING::rbegin()
 {
@@ -102,7 +102,11 @@ void MYSTRING::resize(int n, char c)
 int MYSTRING::capacity()
 {
 	int i = 0;
-	while (*str) i++;
+	while (str)
+	{ 
+		i++; 
+		*str++; 
+	}
 	return i;
 }
 void MYSTRING::clear()
@@ -394,4 +398,43 @@ MYSTRING& MYSTRING::erase(int pos, int n)
 	len = len - n;
 	str[len] = '\0';
 	return *this;
+}
+MYSTRING& MYSTRING::replace(int pos, int n, const MYSTRING&s)
+{
+	
+	return *this;
+}
+MYSTRING& MYSTRING::replace(int pos, int n, const MYSTRING&s, int subpos, int subn)
+{
+	return *this;
+}
+MYSTRING& MYSTRING::replace(int pos, int n, const char *s)
+{
+	return *this;
+}
+MYSTRING& MYSTRING::replace(int pos, int n, int len, char c)
+{
+	return *this;
+}
+void MYSTRING::swap(MYSTRING&s)
+{
+	MYSTRING temp = *this;
+	delete[] str;
+	len = s.len;
+	str = new char[len+1];
+	for (int i = 0; i < len; i++)
+		str[i] = s.str[i];
+	str[len] = '\0';
+	delete[] s.str;
+	s.len = temp.len;
+	s.str = new char[s.len+1];
+	for (int i = 0; i < temp.len; i++)
+		s.str[i] = temp.str[i];
+	s.str[s.len] = '\0';
+}
+void MYSTRING::pop_back()
+{
+	len = len - 1;
+	str = (char*)realloc(str, (len + 1)*sizeof(char));
+	str[len] = '\0';
 }
