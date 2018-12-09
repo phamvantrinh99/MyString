@@ -5,6 +5,7 @@ using namespace std;
 class MYSTRING
 { 
 public:
+	typedef char *iterator;
 	int len;
 	char *str;
 public:
@@ -15,8 +16,8 @@ public:
 	~MYSTRING();
 	MYSTRING& operator=(const MYSTRING&s);
 	MYSTRING& operator=(const char* c);
-	char* begin();
-	char *end();
+	iterator begin();
+	iterator end();
 	char* rbegin();
 	char *rend();
 	int size();
@@ -49,5 +50,11 @@ public:
 	MYSTRING& insert(int pos, const char*s, int n);
 	MYSTRING& insert(int pos, int n, char c);
 	MYSTRING& erase(int pos, int n);
+	MYSTRING& replace(int pos, int n, const MYSTRING&s);
+	MYSTRING& replace(int pos, int n, const MYSTRING&s, int subpos, int subn);
+	MYSTRING& replace(int pos, int n, const char *s);
+	MYSTRING& replace(int pos, int n, int len, char c);
+	void swap(MYSTRING&s);
+	void pop_back();
 };
 #endif
