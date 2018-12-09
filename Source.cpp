@@ -216,7 +216,6 @@ MYSTRING& MYSTRING::append(int n, char c)
 	str[len] = '\0';
 	return *this;
 }
-
 void MYSTRING::push_back(char c)
 {
 	len = len + 1;
@@ -437,4 +436,414 @@ void MYSTRING::pop_back()
 	len = len - 1;
 	str = (char*)realloc(str, (len + 1)*sizeof(char));
 	str[len] = '\0';
+}
+int MYSTRING::copy(char*s, int n, int pos)
+{
+	if (pos + n > len) return -1;
+	int temp = 0;
+	for (int i = pos; i < pos + n; i++)
+	{
+		s[temp] = str[i];
+		temp++;
+	}
+	return temp;
+}
+int MYSTRING::find(const MYSTRING&s)
+{
+	int i = 0;
+	while (i < len)
+	{
+		bool flag = true;
+		int t = 0;
+		for (int j = i; j < i + s.len; j++)
+		{
+			if (str[j] != s.str[t]) flag = false;
+			t++;
+		}
+		if (flag == true) return i;
+		else flag = false;
+		i++;
+	}
+	return -1;
+}
+int MYSTRING::find(const char*s)
+{
+	int i = 0;
+	while (i < len)
+	{
+		bool flag = true;
+		int t = 0;
+		for (int j = i; j < i + strlen(s); j++)
+		{
+			if (str[j] != s[t]) flag = false;
+			t++;
+		}
+		if (flag == true) return i;
+		else flag = false;
+		i++;
+	}
+	return -1;
+}
+int MYSTRING::find(const char*s, int pos, int n)
+{
+	int i = pos;
+	while (i < len)
+	{
+		bool flag = true;
+		int t = 0;
+		for (int j = i; j < i + n; j++)
+		{
+			if (str[j] != s[t]) flag = false;
+			t++;
+		}
+		if (flag == true) return i;
+		else flag = false;
+		i++;
+	}
+	return -1;
+}
+int MYSTRING::find(char c)
+{
+	bool flag = false;
+	for (int i = 0; i < len; i++)
+	{
+		if (str[i] == c)
+		{
+			return i;
+			flag = true;
+		}
+	}
+	if (flag == false) return -1;
+}
+int MYSTRING::rfind(const MYSTRING&s)
+{
+	int i = len-1;
+	while (i >=0)
+	{
+		bool flag = true;
+		int t = 0;
+		for (int j = i; j < i + s.len; j++)
+		{
+			if (str[j] != s.str[t]) flag = false;
+			t++;
+		}
+		if (flag == true) return i;
+		else flag = false;
+		i--;
+	}
+	return -1;
+}
+int MYSTRING::rfind(const char*s)
+{
+	int i = len-1;
+	while (i >=0)
+	{
+		bool flag = true;
+		int t = 0;
+		for (int j = i; j < i + strlen(s); j++)
+		{
+			if (str[j] != s[t]) flag = false;
+			t++;
+		}
+		if (flag == true) return i;
+		else flag = false;
+		i--;
+	}
+	return -1;
+}
+int MYSTRING::rfind(const char*s, int pos, int n)
+{
+	int i = len-1;
+	while (i >=pos)
+	{
+		bool flag = true;
+		int t = 0;
+		for (int j = i; j < i + n; j++)
+		{
+			if (str[j] != s[t]) flag = false;
+			t++;
+		}
+		if (flag == true) return i;
+		else flag = false;
+		i--;
+	}
+	return -1;
+}
+int MYSTRING::rfind(char c)
+{
+	bool flag = false;
+	for (int i = len-1; i >=0; i--)
+	{
+		if (str[i] == c)
+		{
+			return i;
+			flag = true;
+		}
+	}
+	if (flag == false) return -1;
+}
+int MYSTRING::find_first_of(const MYSTRING&s)
+{
+	int i = 0;
+	bool flag = false;
+	while (i < len)
+	{
+		for (int j = 0; j < s.len;j++)
+		if (str[i] == s.str[j])
+		{
+			flag = true;
+			return i;
+		}
+		i++;
+	}
+	if (flag == false) return -1;
+}
+int MYSTRING::find_first_of(const char*s)
+{
+	int i = 0;
+	bool flag = false;
+	while (i < len)
+	{
+		for (int j = 0; j < strlen(s); j++)
+		if (str[i] == s[j])
+		{
+			flag = true;
+			return i;
+		}
+		i++;
+	}
+	if (flag == false) return -1;
+}
+int MYSTRING::find_first_of(const char*s, int pos, int n)
+{
+	int i = 0;
+	bool flag = false;
+	while (i < len)
+	{
+		for (int j = 0; j < n; j++)
+		if (str[i] == s[j])
+		{
+			flag = true;
+			return i;
+		}
+		i++;
+	}
+	if (flag == false) return -1;
+}
+int MYSTRING::find_first_of(char c)
+{
+	bool flag = false;
+	for (int i = 0; i < len; i++)
+	{
+		if (str[i] == c)
+		{
+			return i;
+			flag = true;
+		}
+	}
+	if (flag == false) return -1;
+}
+int MYSTRING::find_last_of(const MYSTRING&s)
+{
+	int i = len-1;
+	bool flag = false;
+	while (i >=0)
+	{
+		for (int j = 0; j < s.len; j++)
+		if (str[i] == s.str[j])
+		{
+			flag = true;
+			return i;
+		}
+		i--;
+	}
+	if (flag == false) return -1;
+}
+int MYSTRING::find_last_of(const char*s)
+{
+	int i = len-1;
+	bool flag = false;
+	while (i >=0)
+	{
+		for (int j = 0; j < strlen(s); j++)
+		if (str[i] == s[j])
+		{
+			flag = true;
+			return i;
+		}
+		i--;
+	}
+	if (flag == false) return -1;
+}
+int MYSTRING::find_last_of(const char*s, int pos, int n)
+{
+	int i = len-1;
+	bool flag = false;
+	while (i >=0)
+	{
+		for (int j = 0; j < n; j++)
+		if (str[i] == s[j])
+		{
+			flag = true;
+			return i;
+		}
+		i--;
+	}
+	if (flag == false) return -1;
+}
+int MYSTRING::find_last_of(char c)
+{
+	bool flag = false;
+	for (int i = len-1; i >=0; i--)
+	{
+		if (str[i] == c)
+		{
+			return i;
+			flag = true;
+		}
+	}
+	if (flag == false) return -1;
+}
+int MYSTRING::find_first_not_of(const MYSTRING&s)
+{
+	int i = 0;
+	bool flag = false;
+	while (i < len)
+	{
+		flag = false;
+		for (int j = 0; j < s.len; j++)
+		if (str[i] == s.str[j])
+		{
+			flag = true;
+		}
+		if (flag == false) return i;
+		i++;
+	}
+	if (flag == true) return -1;
+}
+int MYSTRING::find_first_not_of(const char*s)
+{
+	int i = 0;
+	bool flag = false;
+	while (i < len)
+	{
+		flag = false;
+		for (int j = 0; j < strlen(s); j++)
+		if (str[i] == s[j])
+		{
+			flag = true;
+		}
+		if (flag == false) return i;
+		i++;
+	}
+	if (flag == true) return -1;
+}
+int MYSTRING::find_first_not_of(const char*s, int pos, int n)
+{
+	int i = 0;
+	bool flag = false;
+	while (i < len)
+	{
+		flag = false;
+		for (int j = 0; j < n; j++)
+		if (str[i] == s[j])
+		{
+			flag = true;
+		}
+		if (flag == false) return i;
+		i++;
+	}
+	if (flag == true) return -1;
+}
+int MYSTRING::find_first_not_of(char c)
+{
+	bool flag = false;
+	for (int i = 0; i < len; i++)
+	{
+		if (str[i] != c)
+		{
+			return i;
+			flag = true;
+		}
+	}
+	if (flag == false) return -1;
+}
+int MYSTRING::find_last_not_of(const MYSTRING&s)
+{
+	int i = len-1;
+	bool flag = false;
+	while (i >=0)
+	{
+		flag = false;
+		for (int j = 0; j < s.len; j++)
+		if (str[i] == s.str[j])
+		{
+			flag = true;
+		}
+		if (flag == false) return i;
+		i--;
+	}
+	if (flag == true) return -1;
+}
+int MYSTRING::find_last_not_of(const char*s)
+{
+	int i = len-1;
+	bool flag = false;
+	while (i >=0)
+	{
+		flag = false;
+		for (int j = 0; j < strlen(s); j++)
+		if (str[i] == s[j])
+		{
+			flag = true;
+		}
+		if (flag == false) return i;
+		i--;
+	}
+	if (flag == true) return -1;
+}
+int MYSTRING::find_last_not_of(const char*s, int pos, int n)
+{
+	int i = len-1;
+	bool flag = false;
+	while (i >=0)
+	{
+		flag = false;
+		for (int j = 0; j < n; j++)
+		if (str[i] == s[j])
+		{
+			flag = true;
+		}
+		if (flag == false) return i;
+		i--;
+	}
+	if (flag == true) return -1;
+}
+int MYSTRING::find_last_not_of(char c)
+{
+	bool flag = false;
+	for (int i = len-1; i >=0; i--)
+	{
+		if (str[i] != c)
+		{
+			return i;
+			flag = true;
+		}
+	}
+	if (flag == false) return -1;
+}
+MYSTRING MYSTRING::substr(int pos, int n)
+{
+	MYSTRING a;
+	a.len = n;
+	a.str = new char[a.len+1];
+	int temp = 0;
+	for (int i = pos; i < pos + n; i++)
+	{
+		a.str[temp] = str[i];
+		temp++;
+	}
+	a.str[a.len] = '\0';
+	cout << a.str << endl;
+	return a;
 }
