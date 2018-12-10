@@ -82,5 +82,12 @@ public:
 	int find_last_not_of(const char*s, int pos, int n);
 	int find_last_not_of(char c);
 	MYSTRING substr(int pos, int n);
+	int compare(const MYSTRING&s) const;
+	int compare(int pos, int n, const MYSTRING&s) const;
+	int compare(int pos, int n, const MYSTRING&s, int subpos, int subn) const;
+	int compare(const char*s) const;
+	int compare(int pos, int n, const char*s) const;
+	int compare(int pos, int n, const char*s, int subn) const;
+	istream& getline(istream& is, MYSTRING& str, char delim);
 };
 #endif
