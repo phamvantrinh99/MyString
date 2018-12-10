@@ -847,3 +847,59 @@ MYSTRING MYSTRING::substr(int pos, int n)
 	cout << a.str << endl;
 	return a;
 }
+int MYSTRING::compare(const MYSTRING&s) const
+{
+	return strcmp(str, s.str);
+}
+int MYSTRING::compare(int pos, int n, const MYSTRING&s) const
+{
+	if (n < s.len) return -1;
+	if (n > s.len) return 1;
+	MYSTRING a = *this;
+	a.append(a, pos, n);
+	return strcmp(a.str, s.str);
+}
+int MYSTRING::compare(int pos, int n, const MYSTRING&s, int subpos, int subn) const
+{
+	if (n < subn) return -1;
+	if (n>subn) return 1;
+	MYSTRING a = *this;
+	MYSTRING b = s;
+	a.append(a,pos, n);
+	b.append(b, subpos, subn);
+	return strcmp(a.str, b.str);
+}
+int MYSTRING::compare(const char*s) const
+{
+	return strcmp(str, s);
+}
+int MYSTRING::compare(int pos, int n, const char*s) const
+{
+	if (n < strlen(s)) return -1;
+	if (n > strlen(s)) return 1;
+	MYSTRING a = *this;
+	a.append(a, pos, n);
+	return strcmp(a.str, s);
+}
+int MYSTRING::compare(int pos, int n, const char*s, int subn) const
+{
+	if (n < subn) return -1;
+	if (n>subn) return 1;
+	MYSTRING a = *this;
+	a.append(a, pos, n);
+	char*b = new char[subn + 1];
+	for (int i = 0; i < subn; i++) b[i] = s[i];
+	b[subn] = '\0';
+	return strcmp(a.str, b);
+}
+istream& MYSTRING::getline(istream& is, MYSTRING& str, char delim)
+{
+	char ch = 0;
+	istream& get(char& ch);
+	while (is && ch != delim)
+	{
+		istream& get(char& ch);
+		str += ch;
+	};
+	return is;
+}
